@@ -1,27 +1,15 @@
 $(function(){
 //app's state
-var rank
-var suit
-var deck
-var shuffled
+var unshuffled
+var shuffled1
+var shuffled2
+var play1
+var play2
+var stack1
+var stack2
+var score1
+var score2
 var winner
-var score
-var lookup = {
-  '2': 2,
-  '3': 3,
-  '4': 4,
-  '5': 5,
-  '6': 6,
-  '7': 7,
-  '8': 8,
-  '9': 9,
-  '10': 10,
-  'J': 11,
-  'Q': 12,
-  'K': 13,
-  'A': 14,
-}
-
 
 //string of 2 = value 2, string of j = value 11
 //this is an object with key value pairs of 2: 2 etc
@@ -30,16 +18,22 @@ var lookup = {
 
 
 //event listeners
-//play
+$('button').on('click', deal)
 //deal
 //war deal
 //menu
 //fight again
 
+
+//cards
+// var cardElement = document.
+// cardElement.setAttribute
+
 //functions
 function init() {
-  deck = []
-  shuffled = []
+  unshuffled = []
+  shuffled1 = []
+  shuffled2 = []
   winner = null
   buildDeck()
   shuffle()
@@ -55,27 +49,33 @@ function render() {
 }
 
 function buildDeck() {
-  ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
-  suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+  var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A']
+  var suits = ['h', 'd', 'c', 's']
+  var lookup = {'02': 2, '03': 3, '04': 4, '05': 5, '06': 6, '07': 7, '08': 8, '09': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
   suits.forEach(function(suit) {
 		ranks.forEach(function(rank) {
       var card = {
-        // css: rank + suit,
+        css: suit + rank,
         value: lookup[rank]
-      }; deck.push(card);
+      }; unshuffled.push(card);
     });
   });
 }
 
 function shuffle() {
-  while (deck.length) {
-    shuffled.push(deck.splice(Math.floor(Math.random() * deck.length), 1) [0])
-  }   console.log(shuffled)
+  while (unshuffled.length) {
+    shuffled1.push(unshuffled.splice(Math.floor(Math.random() * unshuffled.length), 1) [0])
+  } shuffled2 = shuffled1.splice(0, 26)
 }
 
 function deal() {
-//the play button basically, name TBD
-//shifts each deck array
+  if ($('.play1').hasClass('card')) {$('.play1').removeClass(play1.css)}
+  play1 = shuffled1.shift()
+  $('.play1').addClass('card').addClass(play1.css)
+  
+  if ($('.play2').hasClass('card')) {$('.play2').removeClass(play2.css)}
+  play2 = shuffled2.shift()
+  $('.play2').addClass('card').addClass(play2.css)
 }
 
 function war() {
@@ -101,14 +101,8 @@ init();
 // the player with a higher value card gets both cards added to the bottom of their deck
 // if both cards are equal value, do war
 
-// War (tie) round
-// each player draws top 4 cards, and the final one is what’s played
-// if the player does not have 4 cards, he loses
-
 // Win game
 // if a player’s deck is empty, he loses
 
 //give every card a number value
-//score is just player 1's score, player 2 is the opposite
-
-//while deck.length shuffled.push(deck.splice(math.floor(math.random())*deck.length, 1)[0])
+//score is the length of each array
