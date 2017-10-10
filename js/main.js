@@ -1,18 +1,14 @@
 $(function(){
+
 //app's state
-var unshuffled
-var shuffled1
-var shuffled2
-var play1
-var play2
+var deck
 var stack1
 var stack2
+var play1
+var play2
 var score1
 var score2
 var winner
-
-//string of 2 = value 2, string of j = value 11
-//this is an object with key value pairs of 2: 2 etc
 
 //cached element references
 
@@ -24,62 +20,104 @@ $('button').on('click', deal)
 //menu
 //fight again
 
-
-//cards
-// var cardElement = document.
-// cardElement.setAttribute
-
 //functions
 function init() {
-  unshuffled = []
-  shuffled1 = []
-  shuffled2 = []
+  deck = []
+  stack1 = []
+  stack2 = []
+  play1 = []
+  play2 = []
   winner = null
   buildDeck()
   shuffle()
-  render()
 }
 
 function render() {
-//wait 1 second, determine which value is higher
-//assign a value to the winner of round to make the next step easier?
-//pop both cards, push both to winning deck (pop winner as well so that you can add it to the bottom of his deck)
-//if tie, run war function?
-//checks for winner aka if anyone has no items in their array, the opposite is the winner
+  if (stack1.length === 0) {winner = 2}
+  if (stack2.length === 0) {winner = 1}
+  score1 = stack1.length
+  score2 = stack2.length
+  console.log(score1, score2)
+}
+
+function score() {
+
+}
+
+function win() {
+
 }
 
 function buildDeck() {
   var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A']
-  var suits = ['h', 'd', 'c', 's']
+  var suits = ['h', 's']
   var lookup = {'02': 2, '03': 3, '04': 4, '05': 5, '06': 6, '07': 7, '08': 8, '09': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
   suits.forEach(function(suit) {
 		ranks.forEach(function(rank) {
       var card = {
         css: suit + rank,
         value: lookup[rank]
-      }; unshuffled.push(card);
+      }; deck.push(card);
     });
   });
 }
 
 function shuffle() {
-  while (unshuffled.length) {
-    shuffled1.push(unshuffled.splice(Math.floor(Math.random() * unshuffled.length), 1) [0])
-  } shuffled2 = shuffled1.splice(0, 26)
+  while (deck.length) {
+    stack1.push(deck.splice(Math.floor(Math.random() * deck.length), 1) [0])
+  } stack2 = stack1.splice(0, 13)
 }
 
 function deal() {
-  if ($('.play1').hasClass('card')) {$('.play1').removeClass(play1.css)}
-  play1 = shuffled1.shift()
-  $('.play1').addClass('card').addClass(play1.css)
+  $('#play1').removeClass()
+  play1[0] = stack1.shift()
+  $('#play1').addClass('card').addClass(play1[0].css)
   
-  if ($('.play2').hasClass('card')) {$('.play2').removeClass(play2.css)}
-  play2 = shuffled2.shift()
-  $('.play2').addClass('card').addClass(play2.css)
+  $('#play2').removeClass()
+  play2[0] = stack2.shift()
+  $('#play2').addClass('card').addClass(play2[0].css)
+  compare()
+}
+
+function compare() {
+  if (play1[0].value === play2[0].value) {
+    war()
+  } else if (play1[0].value > play2[0].value) {
+      while (play1 != false) {
+      stack1.push(play1.pop())
+    }
+      while (play2 != false) {
+      stack1.push(play2.pop())
+    }
+  } else {
+      while (play1 != false) {
+      stack2.push(play1.pop())
+    }
+      while (play2 != false) {
+      stack2.push(play2.pop())
+    }
+  } render()
 }
 
 function war() {
-//war stuff, focus on later
+  if (stack1.length > 3) {
+    for (var i = 0; i < 4; i++) {
+    play1.unshift(stack1.shift())
+  }
+} else {
+    while (stack1.length > 0) {
+    play1.unshift(stack1.shift())
+  }
+} if (stack2.length > 3) {
+    for (var i = 0; i < 4; i++) {
+    play2.unshift(stack2.shift())
+  }
+} else {
+    while (stack2.length > 0) {
+    play2.unshift(stack2.shift())
+  }
+}
+compare()
 }
 
 init();
