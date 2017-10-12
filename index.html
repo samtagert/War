@@ -12,26 +12,40 @@
   <script src="js/main.js" defer></script>
 </head>
 <body>
-  <header>
+  <header class="jumbotron">
+    <div><img src="" class="gif" id="gif1"></div>
+    <div><img src="" class="gif" id="gif2" ></div>
     <h1>WAR</h1>
-    <h4>What is it good for?</h4>
-    <button id="play">Absolutely nothing</button>
-  <!-- </header>
-  <section id="inMenu">
+    <h4 class="inMenu">What is it good for?</h4>
+    <h4 class="inPlay">Good luck!</h4>
+    <button "type=button" class="btn btn-primary btn-lg inMenu" id="play">Absolutely nothing</button>
+    <button "type=button" class="btn btn-primary btn-lg inPlay" id="deal">Battle</button>
+    <button "type=button" class="inPlay" id="war">WAR</button>
+  </header>
+  <section class="inMenu">
     <h3>THE DEAL</h3>
     <p>The deck is divided evenly, with each player receiving 26 cards, face down.</p>
     <h3>THE PLAY</h3>
-    <p>Each player turns up a card at the same time and the player with the higher card takes both cards and puts them, face down, on the bottom of his stack.</p>
+    <p>Each player turns up a card at the same time and the player with the higher card takes both cards and puts them, face down, on the bottom of their stack.</p>
     <h3>WAR</h3>
-    <p>If the cards are the same rank, it is War. Each player turns up one card face down and one card face up. The player with the higher cards takes both piles (six cards). If the turned-up cards are again the same rank, each player places another card face down and turns another card face up. The player with the higher card takes all 10 cards, and so on.</p>
+    <p>If the cards are the same rank, it is War. Each player turns up three cards face down and one card face up. The player with the higher card face up takes both piles (ten cards). If the turned-up cards are again the same rank, each player places another three cards face down and turns another card face up. The player with the higher card takes all 18 cards, and so on.</p>
     <h3>HOW TO KEEP SCORE</h3>
-    <p>The game ends when one player has won all the cards.</p>
-  </section> -->
-  <section id="inPlay">
-    <div id="stack p1"></div>
-    <div id="stack p2 "></div>
-    <div id="play1"></div>
-    <div id="play2"></div>
+    <p>The game ends when one player has won all the cards. If War happens and a player doesn't have the four cards needed to draw, they simply draw what they have, turning the last card face up.</p>
   </section>
+  <section class="inPlay">
+    <div id="stack p1" class="xlarge card back"></div>
+    <div id="play1" class="xlarge card back"></div>
+    <div id="play2" class="xlarge card back"></div>
+    <div id="stack p2" class="xlarge card back"></div>
+    <!-- change play1/play2 starting class to something beautiful -->
+  </section>
+  <footer class="inPlay">
+    <div id="progress">
+      <div id="score1"></div>
+      <div id="score2"></div>
+      <div><img src="https://openclipart.org/image/2400px/svg_to_png/252171/bomb.png" id="bomb"></div>
+    </div>
+  </footer>
+  <!-- <audio src="http://soundbible.com/media/stream.swf"></audio> -->
 </body>
 </html>
