@@ -4,7 +4,6 @@ header, section, footer {
   text-align: center;
 }
 
-
 .jumbotron {
   font-family: 'Cinzel', serif; 
   background-color: lightskyblue;
@@ -37,7 +36,6 @@ body {
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
-
 
 .gifs {
   position: relative;

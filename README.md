@@ -19,5 +19,5 @@
 <h1>Getting Started</h1>
   <a href="https://samtagert.github.io/War/">Click to play.</a>
 <h1>Next Steps</h1>
-  <p>The next big step is to add animation to cards leaving or going back to each player's stack.</p>
-<h2><a href="https://trello.com/b/1IOQGH3k/wdi-project-1">Trello</a></h2>
+  <p>The next big steps are to add music, sound effects, and animation to cards leaving or going back to each player's stack.</p>
+<h4><a href="https://trello.com/b/1IOQGH3k/wdi-project-1">Trello</a></h4>

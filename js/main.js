@@ -93,7 +93,7 @@ function win() {
   $winner === $gif1 ? $h1.html('P1 WINS') : $h1.html('P2 WINS');
   $gifs.show();
   $deal.attr('disabled', '');
-  $bomb.attr('src', 'https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif').css({'width':'200px'});
+  $bomb.attr('src', 'https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif').css('width', '200px');
   $winner.attr('src', 'https://media.giphy.com/media/MFU0Bp8LmK5GM/giphy.gif');
   $loser.attr('src', loseGifs[Math.floor(Math.random() * (loseGifs.length))]);
   $('h4.inPlay').html('Good job!');
@@ -190,52 +190,3 @@ function warDisplay() {
 $inMenu.hide();
 init();
 });
-
-//audio
-
-// play1[0].value > play2[0].value ? play1Win() : play2Win()
-// function play1Win() {
-  //   while (play1.length > 0) {
-    //     stack1.push(play1.pop())
-    //     $bomb.animate({'left':'+=6px'}, 50)
-    //   }
-    //   while (play2.length > 0) {
-      //     stack1.push(play2.pop())
-//     $bomb.animate({'left':'+=6px'}, 50)
-//   }
-// }
-
-// function play2Win() {
-//   while (play2.length > 0) {
-//     stack2.push(play2.pop())
-//     $bomb.animate({'left':'-=6px'}, 50)
-//   }
-//   while (play1.length > 0) {
-//     stack2.push(play1.pop())
-//     $bomb.animate({'left':'-=6px'}, 50)
-//   } 
-// }
-
-// function war() {
-//   if (stack1.length > 3) {
-//     for (var i = 0; i < 4; i++) {
-//       play1.unshift(stack1.shift())
-//     }
-//   } else {
-//     while (stack1.length > 0) {
-//       play1.unshift(stack1.shift())
-//     }
-//   }
-//   if (stack2.length > 3) {
-//     for (var i = 0; i < 4; i++) {
-//       play2.unshift(stack2.shift())
-//     }
-//   } else {
-//     while (stack2.length > 0) {
-//       play2.unshift(stack2.shift())
-//     }
-//   }
-//   changeCardFront()
-//   warDisplay()
-//   compare()
-// }
