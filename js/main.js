@@ -24,7 +24,7 @@ var $play2 = $('#play2');
 var $score1 = $('#score1');
 var $score2 = $('#score2');
 var warGifs = ['https://media.giphy.com/media/3reGZ5XDFWPte/giphy.gif', 'https://media.giphy.com/media/TKFPaEt0YWwyk/giphy.gif', 'https://media.giphy.com/media/3og0IGYBSB8WykDt16/giphy.gif', 'https://media.giphy.com/media/vlbVMxsUYSLQs/giphy.gif', 'https://media.giphy.com/media/cAiQiBZEWWzAI/giphy.gif', 'https://media.giphy.com/media/9umH7yTO8gLYY/giphy.gif', 'https://media.giphy.com/media/DMvK89Svcx7t6/giphy.gif', 'https://media.giphy.com/media/aoNxAPcc5hyQo/giphy.gif', 'https://media.giphy.com/media/l1J3Tqz2fpsx60MDe/giphy.gif', 'https://media.giphy.com/media/yyoHU6mOdu6UU/giphy.gif', 'https://media.giphy.com/media/Pn1232jBLN0TC/giphy.gif', 'https://media.giphy.com/media/scmqsNR8Zyf9m/giphy.gif'];
-var loseGifs = ['https://media.giphy.com/media/EizPK3InQbrNK/giphy.gif', 'https://media.giphy.com/media/Z5R4RxA1xwVnq/giphy.gif', 'https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif', 'https://media.giphy.com/media/Hwq45iwTIUBGw/giphy.gif', 'https://media.giphy.com/media/Ll5vSMprGdwe4/giphy.gif', 'https://media.giphy.com/media/26BGqofNXjxluwX0k/giphy.gif', 'https://media.giphy.com/media/ZeB4HcMpsyDo4/giphy.gif'];
+var loseGifs = ['https://media.giphy.com/media/11n2IHjhycUAc8/giphy.gif', 'https://media.giphy.com/media/EizPK3InQbrNK/giphy.gif', 'https://media.giphy.com/media/Z5R4RxA1xwVnq/giphy.gif', 'https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif', 'https://media.giphy.com/media/Hwq45iwTIUBGw/giphy.gif', 'https://media.giphy.com/media/Ll5vSMprGdwe4/giphy.gif', 'https://media.giphy.com/media/26BGqofNXjxluwX0k/giphy.gif', 'https://media.giphy.com/media/ZeB4HcMpsyDo4/giphy.gif'];
 
 //event listeners
 $play.on('click', playGame);
@@ -41,7 +41,6 @@ function init() {
   play2 = [];
   mainDisplay();
   buildDeck();
-  render();
 }
 
 function buildDeck() {
@@ -59,7 +58,7 @@ function buildDeck() {
   while (deck.length) {
     stack1.push(deck.splice(Math.floor(Math.random() * deck.length), 1) [0])
   }; 
-  stack2 = stack1.splice(0, 26)
+  stack2 = stack1.splice(0, 26);
 }
 
 function playGame() {
@@ -74,8 +73,8 @@ function playGame() {
 
 function backToMenu() {
   $('h4.inPlay').html('Good luck!');
-  $play1.removeClass().addClass("xlarge card back");
-  $play2.removeClass().addClass("xlarge card back");
+  $play1.removeClass().addClass('xlarge card back');
+  $play2.removeClass().addClass('xlarge card back');
   $deal.removeAttr('disabled', '');
   $bomb.attr('src', "https://openclipart.org/image/2400px/svg_to_png/252171/bomb.png").css({'left':'15px', 'width':'100px'});
   $deal.animate({borderSpacing: -720}, {
@@ -88,35 +87,28 @@ function backToMenu() {
   init();
 }
 
+function win() {
+  var $loser = stack1.length === 0 ? $gif1 : $gif2;
+  var $winner = stack1.length === 0 ? $gif2 : $gif1;
+  $winner === $gif1 ? $h1.html('P1 WINS') : $h1.html('P2 WINS');
+  $gifs.show();
+  $deal.attr('disabled', '');
+  $bomb.attr('src', 'https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif').css({'width':'200px'});
+  $winner.attr('src', 'https://media.giphy.com/media/MFU0Bp8LmK5GM/giphy.gif');
+  $loser.attr('src', loseGifs[Math.floor(Math.random() * (loseGifs.length))]);
+  $('h4.inPlay').html('Good job!');
+  setTimeout (function() {
+    $deal.hide();
+    $back.show();
+  }, 1000);
+}
+
 function render() {
   $score1.html(stack1.length);
   $score2.html(stack2.length);
   if (stack1.length === 0 || stack2.length === 0) {
-    win()
+    win();
   };
-}
-
-function win() {
-  var $winner = stack1.length === 0 ? $gif2 : $gif1;
-  var $loser = stack1.length === 0 ? $gif1 : $gif2;
-  $winner = $gif1 ? $h1.html('P1 WINS') : $h1.html('P2 WINS');
-  $gifs.show();
-  $deal.attr('disabled', '');
-  $bomb.attr('src', 'https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif').css({'width':'200px'});
-  $winner.attr('src', 'https://media.giphy.com/media/3oz8xHu6yNmd7T3QqI/giphy.gif');
-  $loser.attr('src', loseGifs[Math.floor(Math.random() * (loseGifs.length))]);
-  $('h4.inPlay').html('Good job!');
-  setTimeout (function() {
-    $deal.hide()
-    $back.show()
-  }, 1000)
-}
-
-function deal() {
-  play1.push(stack1.shift());
-  play2.push(stack2.shift());
-  changeCardPictures();
-  compare();
 }
 
 function compare() {
@@ -132,28 +124,35 @@ function compare() {
   render();
 }
 
+function playWin(player) {
+  var numMoves = play1.length + play2.length;
+  var targetStack = player === 1 ? stack1 : stack2;
+  var moveBomb = player === 1 ? '+=6px' : '-=6px';
+  if (player === 1) {
+    targetStack.push(...play1.splice(0), ...play2.splice(0));
+  } else {
+    targetStack.push(...play2.splice(0), ...play1.splice(0));
+  };
+  for (var i = numMoves; i > 0; i--) {
+    $bomb.animate({'left':moveBomb}, 50);
+  };
+}
+
+function deal() {
+  play1.push(stack1.shift());
+  play2.push(stack2.shift());
+  changeCardFront();
+  compare();
+}
+
 function war() {
   var numDeal = Math.min(stack1.length, 4);
   play1.unshift(...stack1.splice(0, numDeal));
   numDeal = Math.min(stack2.length, 4);
   play2.unshift(...stack2.splice(0, numDeal));
-  changeCardPictures();
+  changeCardFront();
   warDisplay();
   compare();
-}
-
-function playWin(player) {
-  var numMoves = play1.length + play2.length;
-  var targetDeck = player === 1 ? stack1 : stack2;
-  var diff = player === 1 ? '+=6px' : '-=6px';
-  if (player === 1) {
-    targetDeck.push(...play1.splice(0), ...play2.splice(0));
-  } else {
-    targetDeck.push(...play2.splice(0), ...play1.splice(0));
-  };
-  for (var i = numMoves; i > 0; i--) {
-    $bomb.animate({'left':diff}, 50);
-  };
 }
 
 function warGif() {
@@ -161,7 +160,7 @@ function warGif() {
   $gif2.attr('src', warGifs[Math.floor(Math.random() * (warGifs.length))]);
 }
 
-function changeCardPictures() {
+function changeCardFront() {
   $play1.removeClass();
   $play2.removeClass();  
   $play1.addClass('card').addClass('xlarge').addClass(play1[0].css);
@@ -174,6 +173,8 @@ function mainDisplay() {
   $war.hide();
   $back.hide();
   $gifs.hide();
+  $score1.html(stack1.length);
+  $score2.html(stack2.length);
   $h1.html('WAR');
 }
 
@@ -190,7 +191,7 @@ $inMenu.hide();
 init();
 });
 
-//audio and win gif
+//audio
 
 // play1[0].value > play2[0].value ? play1Win() : play2Win()
 // function play1Win() {
@@ -234,7 +235,7 @@ init();
 //       play2.unshift(stack2.shift())
 //     }
 //   }
-//   changeCardPictures()
+//   changeCardFront()
 //   warDisplay()
 //   compare()
 // }
