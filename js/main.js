@@ -1,5 +1,5 @@
 $(function(){
-//app's state
+//app's state (variables)
 var deck;
 var stack1;
 var stack2;
